@@ -61,33 +61,15 @@ def accessOC():
         table = driver.find_element(By.XPATH, "//*[@id='prjctList']/tbody")
         #tr이 0일 경우 생각해야 함.
         try:
-            tr = table.find_elements(By.TAG_NAME, "tr")  # 여기서의 갯수변동 추적하면 될듯, 그리고 업데이트 내용은 class = "lft"
+            tr = table.find_elements(By.TAG_NAME, "tr")  
             print("강의 갯수: ",len(tr))
             for i in range(0, len(tr)):
                 print(tr[i].find_element(By.CLASS_NAME,"lft").text.strip())
-                #가능하면 강의 보기 url도 파싱해서 저장하는게 좋겠음
-            #update = tr[len(tr)-1].find_element(By.CLASS_NAME,"lft")
-            #가장 최근에 올라온 업데이트의 내용 텍스트 출력
-            # print("update: ",update.text.strip())
-            # with open(os.path.join(BASE_DIR, 'a.txt'), 'w+') as f:
-            #     f.write(lists[0].text.strip())
-            # for l in lists:
-            #     #print(l.text.strip())
-            #     x = l.text.strip().splitlines()
-            #     print(x)
+
         except:
             print("강의 없음")
     # 내용의 업데이트 판별: latest.txt를 만들어, 내용이 같은지 확인
 
-    # select_subj.select_by_index(1)
-    # time.sleep(3)
-    #
-    # html = driver.page_source
-    # soup = BeautifulSoup(html, 'html.parser')
-
-    # lists = soup.select('#prjctList > tbody')
-    # for l in lists:
-    #     print(l.text.strip())
 
 def accessQZ():
     url = pages_list[6]
@@ -105,9 +87,7 @@ def accessQZ():
     select_subj = Select(subj_dropdown)
 
     count_subj = len(select_subj.options)
-    # 첫번째 강의의 셀렉터:
-    # prjctList > tbody > tr:nth-child(2) > td.lft
-    # 내용 비교가 아니라, prjctList의 전체 테이블의 tr 태그 개수를 비교해야
+
     for i in range(0, count_subj):  # 모든 강의 순회하면서 내용 조회
         select_subj.select_by_index(i)
         time.sleep(2)
@@ -122,8 +102,3 @@ if __name__ == '__main__':
     klas_login(myID, myPW)
     accessOC()
 
-    # list_subj = soup.select('#appSelectSubj > div.col-md-7 > div > div.col-9 > select')
-    # print('갯수: ',len(list_subj))
-    #
-    # for i in list_subj:
-    #     print(i.text.strip())
