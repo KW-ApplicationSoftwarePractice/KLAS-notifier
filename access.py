@@ -6,6 +6,10 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 
+# from django.db import models
+# class OCData(models.Model):
+#     title = models.CharField(max_length=200)
+
 driver = webdriver.Chrome('chromedriver.exe')  # 크롬드라이버 경로
 pages_list = [
     "https://klas.kw.ac.kr/std/lis/evltn/OnlineCntntsStdPage.do", #온라인 컨텐츠
@@ -25,7 +29,7 @@ def klas_login(myID, myPW):
     driver.find_element(By.ID, 'loginPwd').send_keys(myPW)
     driver.find_element(By.CLASS_NAME, 'btn').click()
 
-    time.sleep(3)
+    time.sleep(2)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -54,11 +58,25 @@ def accessOC():
         html = driver.page_source
         soup = BeautifulSoup(html, 'html.parser')
         lists = soup.select('#prjctList > tbody')
-        with open(os.path.join(BASE_DIR, 'a.txt'), 'w+') as f:
-            f.write(lists[0].text.strip())
-        # for l in lists:
-        #     print(l.text.strip())
-
+        table = driver.find_element(By.XPATH, "//*[@id='prjctList']/tbody")
+        #tr이 0일 경우 생각해야 함.
+        try:
+            tr = table.find_elements(By.TAG_NAME, "tr")  # 여기서의 갯수변동 추적하면 될듯, 그리고 업데이트 내용은 class = "lft"
+            print("강의 갯수: ",len(tr))
+            for i in range(0, len(tr)):
+                print(tr[i].find_element(By.CLASS_NAME,"lft").text.strip())
+                #가능하면 강의 보기 url도 파싱해서 저장하는게 좋겠음
+            #update = tr[len(tr)-1].find_element(By.CLASS_NAME,"lft")
+            #가장 최근에 올라온 업데이트의 내용 텍스트 출력
+            # print("update: ",update.text.strip())
+            # with open(os.path.join(BASE_DIR, 'a.txt'), 'w+') as f:
+            #     f.write(lists[0].text.strip())
+            # for l in lists:
+            #     #print(l.text.strip())
+            #     x = l.text.strip().splitlines()
+            #     print(x)
+        except:
+            print("강의 없음")
     # 내용의 업데이트 판별: latest.txt를 만들어, 내용이 같은지 확인
 
     # select_subj.select_by_index(1)
