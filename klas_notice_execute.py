@@ -1,4 +1,5 @@
 import os
+import sys
 import time
 import requests
 from bs4 import BeautifulSoup
@@ -9,10 +10,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
-def klas_notice_lecture(myID, myPW):
-
-    #현재 완료되지 않은 강의 목록을 불러오는 함수
-    #과목명/강의제목/강의기간 형태의 str을 담은 array를 return
+def klas_notice(myID, myPW):
 
     driver = webdriver.Chrome('chromedriver.exe') #크롬드라이버 경로
     url_login = "https://klas.kw.ac.kr/" #KLAS 로그인 페이지 주소
@@ -62,17 +60,9 @@ def klas_notice_lecture(myID, myPW):
     except:
         pass
 
-    notice = []
+    notice_lecture = []
     for i in range (0,len(lecture_name)): 
-        notice.append(lecture_class[i] + "/" + lecture_name[i] + "/" + lecture_end[i])
-
-    return notice
-
-
-def klas_notice_homework(myID, myPW):
-
-    #현재 완료되지 않은 과제 목록을 불러오는 함수
-    #과목명/과제제목/과제기간 형태의 str을 담은 array를 return
+        notice_lecture.append(lecture_class[i] + "~~~" + lecture_name[i] + "~~~" + lecture_end[i] + "\n")
 
     driver = webdriver.Chrome('chromedriver.exe') #크롬드라이버 경로
     url_login = "https://klas.kw.ac.kr/" #KLAS 로그인 페이지 주소
@@ -122,17 +112,10 @@ def klas_notice_homework(myID, myPW):
     except:
         pass
 
-    notice = []
+    notice_homework = []
     for i in range (0,len(homework_name)): 
-        notice.append(homework_class[i] + "/" + homework_name[i] + "/" + homework_end[i])
+        notice_homework.append(homework_class[i] + "~~~" + homework_name[i] + "~~~" + homework_end[i] + "\n")
 
-    return notice
-
-
-def klas_notice_quiz(myID, myPW):
-
-    #현재 완료되지 않은 퀴즈 목록을 불러오는 함수
-    #과목명/퀴즈제목/퀴즈기간 형태의 str을 담은 array를 return
 
     driver = webdriver.Chrome('chromedriver.exe') #크롬드라이버 경로
     url_login = "https://klas.kw.ac.kr/" #KLAS 로그인 페이지 주소
@@ -182,10 +165,36 @@ def klas_notice_quiz(myID, myPW):
     except:
         pass
 
-    notice = []
+    notice_quiz = []
     for i in range (0,len(quiz_name)): 
-        notice.append(quiz_class[i] + "/" + quiz_name[i] + "/" + quiz_end[i])
+        notice_quiz.append(quiz_class[i] + "~~~" + quiz_name[i] + "~~~" + quiz_end[i] + "\n")
 
-    return notice
+    return_string = ""
 
-klas_notice_homework("2019203059", "ksh92166@")
+    for ltxt in notice_lecture:
+        return_string = return_string + ltxt
+    return_string = return_string + "///" + "\n"
+
+    for htxt in notice_homework:
+        return_string = return_string + htxt
+    return_string = return_string + "///" + "\n"
+
+    for qtxt in notice_quiz:
+        return_string = return_string + qtxt
+
+    """
+    과목~~~강의제목~~~강의기간
+    과목~~~강의제목~~~강의기간
+    ///
+    과목~~~과제제목~~~과제기간
+    과목~~~과제제목~~~과제기간
+    ///
+    과목~~~퀴즈제목~~~퀴즈기간
+    과목~~~퀴즈제목~~~퀴즈기간
+    """
+
+    print (return_string)
+
+
+
+klas_notice(sys.argv[1], sys.argv[2])
