@@ -40,8 +40,8 @@ url_quiz = "https://klas.kw.ac.kr/std/lis/evltn/AnytmQuizStdPage.do" #퀴즈 주
 
 #KLAS 로그인
 driver.get(url_login)
-driver.find_element(By.ID, 'loginId').send_keys("2019203059") #sys.argv[1]
-driver.find_element(By.ID, 'loginPwd').send_keys("ksh92166@") #sys.argv[2]
+driver.find_element(By.ID, 'loginId').send_keys(sys.argv[1])
+driver.find_element(By.ID, 'loginPwd').send_keys(sys.argv[2])
 driver.find_element(By.CLASS_NAME, 'btn').click()
 time.sleep(3)
 
@@ -68,7 +68,6 @@ try:
         else:
             for i in range(1,len(lecture_tbody)):
                 if "100%" in lecture_tbody[i].select_one("td:nth-child(6)").text:
-                    print("다 들은 강의를 확인했음" + str(class_index))
                     pass
                 else:
                     lecture_renew_class.append(soup.select_one('#appHeaderSubj > div > div > div.col-md-10.subtitle > span.subjectname').text)
@@ -107,7 +106,6 @@ try:
                     homework_renew_name.append((homework_table[i].select_one("tr:nth-child(1) > td.lft")).get_text())
                     homework_renew_time.append((homework_table[i].select_one("tr:nth-child(1) > td:nth-child(3)")).get_text().strip())
                 else:
-                    print("다 제출한 과제를 확인했음" + str(class_index))
                     pass
 
         class_index = class_index + 1
@@ -142,7 +140,6 @@ try:
                     quiz_renew_name.append((quiz_tbody[i].select_one("td:nth-child(4)")).get_text())
                     quiz_renew_time.append((quiz_tbody[i].select_one("td:nth-child(5)")).get_text().strip())
                 else:
-                    print("다 푼 퀴즈를 확인했음" + str(class_index))
                     pass
 
         class_index = class_index + 1
@@ -152,19 +149,6 @@ except:
 
 
 #WinForm으로 전달할 return_text 구현
-"""
-강의명1////강의이름1////강의기간1
-강의명2////강의이름2////강의기간2
-강의명3////강의이름3////강의기간3
-####
-강의명1////과제이름1////과제기간1
-강의명2////과제이름2////과제기간2
-강의명3////과제이름3////과제기간3
-####
-강의명1////퀴즈이름1////퀴즈기간1
-강의명2////퀴즈이름2////퀴즈기간2
-강의명3////퀴즈이름3////퀴즈기간3
-"""
 if (len(lecture_renew_class) != 0):
     for i in range(0, len(lecture_renew_class)):
         return_text = return_text + lecture_renew_class[i] + "////" + lecture_renew_name[i] + "////" + lecture_renew_time[i] + "\n"
@@ -182,6 +166,21 @@ if (len(quiz_renew_class) != 0):
         return_text = return_text + quiz_renew_class[i] + "////" + quiz_renew_name[i] + "////" + quiz_renew_time[i] + "\n"
 else:
     pass
+
+"""
+강의명1////강의이름1////강의기간1
+강의명2////강의이름2////강의기간2
+강의명3////강의이름3////강의기간3
+####
+강의명1////과제이름1////과제기간1
+강의명2////과제이름2////과제기간2
+강의명3////과제이름3////과제기간3
+####
+강의명1////퀴즈이름1////퀴즈기간1
+강의명2////퀴즈이름2////퀴즈기간2
+강의명3////퀴즈이름3////퀴즈기간3
+"""
+
 print(return_text)
 
 
