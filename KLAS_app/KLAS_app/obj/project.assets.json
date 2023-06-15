@@ -1496,25 +1496,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\MASTER\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Polaris\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\MASTER\\source\\repos\\KLAS_app\\KLAS_app\\KLAS_app.csproj",
+      "projectUniqueName": "C:\\Users\\Polaris\\Desktop\\KLAS-notifier\\KLAS_app\\KLAS_app\\KLAS_app.csproj",
       "projectName": "KLAS_app",
-      "projectPath": "C:\\Users\\MASTER\\source\\repos\\KLAS_app\\KLAS_app\\KLAS_app.csproj",
-      "packagesPath": "C:\\Users\\MASTER\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\MASTER\\source\\repos\\KLAS_app\\KLAS_app\\obj\\",
+      "projectPath": "C:\\Users\\Polaris\\Desktop\\KLAS-notifier\\KLAS_app\\KLAS_app\\KLAS_app.csproj",
+      "packagesPath": "C:\\Users\\Polaris\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Polaris\\Desktop\\KLAS-notifier\\KLAS_app\\KLAS_app\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\MASTER\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\Polaris\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

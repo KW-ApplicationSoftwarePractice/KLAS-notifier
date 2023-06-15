@@ -46,7 +46,7 @@ namespace Win_KLAS
             process.StartInfo.UseShellExecute = false;
 
             process.StartInfo.FileName = @"C:\\python\\python.exe";
-            process.StartInfo.Arguments = @"KLAS_py\klas_notice_execute.py " + ID + " " + PW;
+            process.StartInfo.Arguments = @"KLAS_py\klas_renew.py " + ID + " " + PW;
 
             process.StartInfo.RedirectStandardOutput = true;
 
