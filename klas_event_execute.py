@@ -42,10 +42,10 @@ def klas_eve(myID, myPW):
     time.sleep(2)
 
     # 학기 선택
-    semester_dropdown = driver.find_element(By.NAME, "selectYearhakgi")
-    select_semester = Select(semester_dropdown)
-    select_semester.select_by_index(1)
-    time.sleep(2)
+    # semester_dropdown = driver.find_element(By.NAME, "selectYearhakgi")
+    # select_semester = Select(semester_dropdown)
+    # select_semester.select_by_index(1)
+    # time.sleep(2)
 
     # 강의 선택
     subj_dropdown = driver.find_element(By.NAME, "selectSubj")
@@ -77,10 +77,10 @@ def klas_eve(myID, myPW):
     time.sleep(2)
 
     # 학기 선택
-    semester_dropdown = driver.find_element(By.NAME, "selectYearhakgi")
-    select_semester = Select(semester_dropdown)
-    select_semester.select_by_index(1)
-    time.sleep(2)
+    # semester_dropdown = driver.find_element(By.NAME, "selectYearhakgi")
+    # select_semester = Select(semester_dropdown)
+    # select_semester.select_by_index(1)
+    # time.sleep(2)
 
     # 강의 선택
     subj_dropdown = driver.find_element(By.NAME, "selectSubj")
@@ -112,10 +112,10 @@ def klas_eve(myID, myPW):
     time.sleep(2)
 
     # 학기 선택
-    semester_dropdown = driver.find_element(By.NAME, "selectYearhakgi")
-    select_semester = Select(semester_dropdown)
-    select_semester.select_by_index(1)
-    time.sleep(2)
+    # semester_dropdown = driver.find_element(By.NAME, "selectYearhakgi")
+    # select_semester = Select(semester_dropdown)
+    # select_semester.select_by_index(1)
+    # time.sleep(2)
 
     # 강의 선택
     subj_dropdown = driver.find_element(By.NAME, "selectSubj")
@@ -157,5 +157,5 @@ def klas_eve(myID, myPW):
         for k in total_table:
             f_write.write(k+'\n')
         f_write.close()
-    driver.Quit()
+    driver.quit()
 klas_eve(sys.argv[1],sys.argv[2])
