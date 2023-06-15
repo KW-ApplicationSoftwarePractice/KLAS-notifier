@@ -1,4 +1,5 @@
 import os
+import sys
 import time
 from bs4 import BeautifulSoup
 #Selenium ver 4.9.1 주의, 4.10.0 부터 옵션 오류
@@ -157,5 +158,5 @@ def klas_eve(myID, myPW):
         for k in total_table:
             f_write.write(k+'\n')
         f_write.close()
-
+    sys.exit()
 klas_eve(sys.argv[1],sys.argv[2])
