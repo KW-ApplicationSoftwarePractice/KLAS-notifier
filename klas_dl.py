@@ -26,7 +26,7 @@ pages_list = [
     "https://klas.kw.ac.kr/std/lis/sport/d052b8f845784c639f036b102fdc3023/BoardListStdPage.do" #공지사항
 ]
 options = webdriver.ChromeOptions()
-# options.add_argument('headless')
+options.add_argument('headless')
 options.add_argument('window-size=1920x1080')
 options.add_argument("disable-gpu")
 
@@ -78,8 +78,8 @@ def klas_dl(myID, myPW):
             driver.back()
         except:
             pass
-    time.sleep(5)
+    time.sleep(2)
     driver.quit()
 
 
-klas_dl('id','pw')
+klas_dl(sys.argv[1],sys.argv[2])
