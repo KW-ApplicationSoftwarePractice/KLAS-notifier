@@ -1,0 +1,16 @@
+C:\Users\MASTER\source\repos\KLAS_app\KLAS_app\obj\Debug\KLAS_app.csproj.AssemblyReference.cache
+C:\Users\MASTER\source\repos\KLAS_app\KLAS_app\obj\Debug\KLAS_app.csproj.SuggestedBindingRedirects.cache
+C:\Users\MASTER\source\repos\KLAS_app\KLAS_app\obj\Debug\Win_KLAS.Login_Form.resources
+C:\Users\MASTER\source\repos\KLAS_app\KLAS_app\obj\Debug\Win_KLAS.Main_Form.resources
+C:\Users\MASTER\source\repos\KLAS_app\KLAS_app\obj\Debug\KLAS_app.Properties.Resources.resources
+C:\Users\MASTER\source\repos\KLAS_app\KLAS_app\obj\Debug\KLAS_app.csproj.GenerateResource.cache
+C:\Users\MASTER\source\repos\KLAS_app\KLAS_app\obj\Debug\KLAS_app.csproj.CoreCompileInputs.cache
+C:\Users\MASTER\source\repos\KLAS_app\KLAS_app\bin\Debug\KLAS_app.exe.config
+C:\Users\MASTER\source\repos\KLAS_app\KLAS_app\bin\Debug\KLAS_app.exe
+C:\Users\MASTER\source\repos\KLAS_app\KLAS_app\bin\Debug\KLAS_app.pdb
+C:\Users\MASTER\source\repos\KLAS_app\KLAS_app\obj\Debug\KLAS_app.exe
+C:\Users\MASTER\source\repos\KLAS_app\KLAS_app\obj\Debug\KLAS_app.pdb
+C:\Users\MASTER\source\repos\KLAS_app\KLAS_app\bin\Debug\Microsoft.Toolkit.Uwp.Notifications.dll
+C:\Users\MASTER\source\repos\KLAS_app\KLAS_app\bin\Debug\System.ValueTuple.dll
+C:\Users\MASTER\source\repos\KLAS_app\KLAS_app\bin\Debug\Microsoft.Toolkit.Uwp.Notifications.pdb
+C:\Users\MASTER\source\repos\KLAS_app\KLAS_app\obj\Debug\KLAS_app.csproj.CopyComplete
