@@ -52,7 +52,7 @@ def klas_eve(myID, myPW):
     select_subj = Select(subj_dropdown)
 
     # 전체 강의 리스트 담을 테이블
-    OC_table = []
+    total_table = []
 
     count_subj = len(select_subj.options)
     for i in range(0, count_subj):  # 모든 강의 순회하면서 내용 조회
@@ -66,28 +66,10 @@ def klas_eve(myID, myPW):
         try:
             tr = table.find_elements(By.TAG_NAME, "tr")
             for j in range(0, len(tr)):
-                OC_table.append(
+                total_table.append(
                     select_subj.options[i].text.strip() + ', ' + tr[j].find_element(By.CLASS_NAME, "lft").text.strip())
         except:
             pass
-
-    with open(os.path.join(BASE_DIR, 'latest_OC.txt'), 'r+') as f_read:
-        # 다른 점 있으면 0, 없으면 1 return
-        status = 1
-        for i in range(0, len(OC_table)):
-            temp = f_read.readline()
-            if (OC_table[i].strip() == temp.strip()):
-                status = 1
-            else:
-                status = 0
-                break
-        f_read.close()
-        print(status)
-
-    with open(os.path.join(BASE_DIR, 'latest_OC.txt'), 'w+') as f_write:
-        for k in OC_table:
-            f_write.write(k + '\n')
-        f_write.close()
 
     #퀴즈 ===============================================================================================
     url = pages_list[6]
@@ -105,7 +87,6 @@ def klas_eve(myID, myPW):
     select_subj = Select(subj_dropdown)
 
     # 전체 퀴즈 리스트 담을 테이블
-    QZ_table = []
 
     count_subj = len(select_subj.options)
     for i in range(0, count_subj):  # 모든 강의 순회하면서 내용 조회
@@ -120,28 +101,10 @@ def klas_eve(myID, myPW):
         try:
             tr = table.find_elements(By.TAG_NAME, "tr")
             for j in range(0, len(tr)):
-                QZ_table.append(
+                total_table.append(
                     select_subj.options[i].text.strip() + ', ' + tr[j].find_element(By.CLASS_NAME, "lft").text.strip())
         except:
             pass
-
-    with open(os.path.join(BASE_DIR, 'latest_QZ.txt'), 'r+') as f_read:
-        # 다른 점 있으면 0, 없으면 1 print
-        status = 1
-        for i in range(0, len(QZ_table)):
-            temp = f_read.readline()
-            if (QZ_table[i].strip() == temp.strip()):
-                status = 1
-            else:
-                status = 0
-                break
-        f_read.close()
-        print(status)
-
-    with open(os.path.join(BASE_DIR, 'latest_QZ.txt'), 'w+') as f_write:
-        for k in QZ_table:
-            f_write.write(k + '\n')
-        f_write.close()
 
     #과제========================================================================================================
     url = pages_list[5]
@@ -159,7 +122,6 @@ def klas_eve(myID, myPW):
     select_subj = Select(subj_dropdown)
 
     #전체 과제 리스트 담을 테이블
-    HW_table = []
 
     count_subj = len(select_subj.options)
     for i in range(0,count_subj): # 모든 강의 순회하면서 내용 조회
@@ -173,25 +135,26 @@ def klas_eve(myID, myPW):
         try:
             tr = table.find_elements(By.TAG_NAME, "tbody")
             for j in range(0, len(tr)):
-                HW_table.append(select_subj.options[i].text.strip() +', '+ tr[j].find_element(By.CLASS_NAME,"lft").text.strip())
+                total_table.append(select_subj.options[i].text.strip() +', '+ tr[j].find_element(By.CLASS_NAME,"lft").text.strip())
         except:
             pass
 
-    with open(os.path.join(BASE_DIR, 'latest_HW.txt'), 'r+') as f_read:
+# 최초 실행시에 f_read 이 부분 주석처리하고 실행해주세요, print(status) 까지요
+    with open(os.path.join(BASE_DIR, 'latest_table.txt'), 'r+') as f_read:
         #다른 점 있으면 0, 없으면 1 print
         status = 1
-        for i in range(0, len(HW_table)):
+        for i in range(0, len(total_table)):
             temp = f_read.readline()
-            if(HW_table[i].strip()  == temp.strip()):
+            if(total_table[i].strip()  == temp.strip()):
                 status = 1
             else:
                 status = 0
                 break
         f_read.close()
         print(status)
-
-    with open(os.path.join(BASE_DIR, 'latest_HW.txt'), 'w+') as f_write:
-        for k in HW_table:
+# 여기까지요
+    with open(os.path.join(BASE_DIR, 'latest_table.txt'), 'w+') as f_write:
+        for k in total_table:
             f_write.write(k+'\n')
         f_write.close()
 
