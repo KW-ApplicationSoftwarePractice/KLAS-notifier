@@ -1,4 +1,3 @@
-@@ -1,263 +0,0 @@
 import os
 import sys
 import time
