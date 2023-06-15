@@ -140,7 +140,7 @@ def klas_eve(myID, myPW):
             pass
 
 # 최초 실행시에 f_read 이 부분 주석처리하고 실행해주세요, print(status) 까지요
-    with open(os.path.join(BASE_DIR, 'latest_table.txt'), 'r+') as f_read:
+    with open(os.path.join(BASE_DIR, 'latest_table.txt'), 'r+', encoding = 'utf-8') as f_read:
         #다른 점 있으면 0, 없으면 1 print
         status = 1
         for i in range(0, len(total_table)):
@@ -153,7 +153,7 @@ def klas_eve(myID, myPW):
         f_read.close()
         print(status)
 # 여기까지요
-    with open(os.path.join(BASE_DIR, 'latest_table.txt'), 'w+') as f_write:
+    with open(os.path.join(BASE_DIR, 'latest_table.txt'), 'w+', encoding = 'utf-8') as f_write:
         for k in total_table:
             f_write.write(k+'\n')
         f_write.close()
