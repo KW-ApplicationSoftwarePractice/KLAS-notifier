@@ -16,7 +16,8 @@ pages_list = [
     "https://klas.kw.ac.kr/std/lis/evltn/DscsnStdPage.do", #토론
     "https://klas.kw.ac.kr/std/lis/evltn/TaskStdPage.do", #과제
     "https://klas.kw.ac.kr/std/lis/evltn/AnytmQuizStdPage.do", #퀴즈
-    "https://klas.kw.ac.kr/std/lis/sport/6972896bfe72408eb72926780e85d041/BoardListStdPage.do" #강의자료실
+    "https://klas.kw.ac.kr/std/lis/sport/6972896bfe72408eb72926780e85d041/BoardListStdPage.do", #강의자료실
+    "https://klas.kw.ac.kr/std/lis/sport/d052b8f845784c639f036b102fdc3023/BoardListStdPage.do"  # 공지사항
 ]
 options = webdriver.ChromeOptions()
 options.add_argument('headless')
@@ -24,6 +25,8 @@ options.add_argument('window-size=1920x1080')
 options.add_argument("disable-gpu")
 
 driver = webdriver.Chrome('chromedriver.exe', chrome_options=options)  # 크롬드라이버 경로
+# 전체 리스트 담을 테이블
+total_table = []
 
 def klas_eve(myID, myPW):
     url_login = "https://klas.kw.ac.kr/" #KLAS 로그인 페이지 주소
@@ -35,6 +38,37 @@ def klas_eve(myID, myPW):
     driver.find_element(By.CLASS_NAME, 'btn').click()
 
     time.sleep(2)
+
+    # 공지사항==========================================================================================
+    url = pages_list[8]
+    driver.get(url)
+    time.sleep(2)
+
+    # # 학기 선택
+    # semester_dropdown = driver.find_element(By.NAME, "selectYearhakgi")
+    # select_semester = Select(semester_dropdown)
+    # select_semester.select_by_index(1)
+    # time.sleep(2)
+
+    # 강의 선택
+    subj_dropdown = driver.find_element(By.NAME, "selectSubj")
+    select_subj = Select(subj_dropdown)
+
+
+    count_subj = len(select_subj.options)
+    for i in range(0, count_subj):  # 모든 강의 순회하면서 내용 조회
+        select_subj.select_by_index(i)
+        time.sleep(2)
+        html = driver.page_source
+        soup = BeautifulSoup(html, 'html.parser')
+        table = driver.find_element(By.XPATH, "//*[@id='appModule']/table/tbody")
+        try:
+            tr = table.find_elements(By.TAG_NAME, "tr")
+            for j in range(0, len(tr)):
+                total_table.append(
+                    select_subj.options[i].text.strip() + ', ' + tr[j].find_element(By.CLASS_NAME, "lft").text.strip())
+        except:
+            pass
 
     #온라인 클래스==========================================================================================
     url = pages_list[0]
@@ -52,7 +86,6 @@ def klas_eve(myID, myPW):
     select_subj = Select(subj_dropdown)
 
     # 전체 강의 리스트 담을 테이블
-    total_table = []
 
     count_subj = len(select_subj.options)
     for i in range(0, count_subj):  # 모든 강의 순회하면서 내용 조회
