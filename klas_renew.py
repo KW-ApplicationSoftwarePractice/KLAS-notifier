@@ -10,10 +10,11 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
+from oauth2client import client
+from oauth2client import tools
+from oauth2client.file import Storage
 
 def klas_renew(myID, myPW):
     lecture_renew_class = []
@@ -38,7 +39,7 @@ def klas_renew(myID, myPW):
     url_homework = "https://klas.kw.ac.kr/std/lis/evltn/TaskStdPage.do" #과제 주소
     url_quiz = "https://klas.kw.ac.kr/std/lis/evltn/AnytmQuizStdPage.do" #퀴즈 주소
 
-
+    
     #KLAS 로그인
     driver.get(url_login)
     driver.find_element(By.ID, 'loginId').send_keys(myID)
@@ -183,17 +184,21 @@ def klas_renew(myID, myPW):
     """
 
     print(return_text)
-
+    
 
     #KLAS와 Google Calender 동기화
     creds_filename = 'credentials.json'
     SCOPES = ['https://www.googleapis.com/auth/calendar']
+    
+    credential_path = os.path.join('./', 'credentials_sample.json')
+    store = Storage(credential_path)
+    credentials = store.get()
+    if not credentials or credentials.invalid:
+        flow = client.flow_from_clientsecrets(creds_filename, SCOPES)
+        credentials = tools.run_flow(flow, store)
+    service = build('calendar', 'v3', credentials=credentials)
 
-    flow = InstalledAppFlow.from_client_secrets_file(creds_filename, SCOPES)
-    creds = flow.run_local_server(port=0)
     today = datetime.date.today().isoformat()
-    service = build('calendar', 'v3', credentials=creds)
-
     event = {
                 'summary': '', # 일정 제목
                 'description': 'KLAS-notifier', # 일정 설명
@@ -229,8 +234,8 @@ def klas_renew(myID, myPW):
     if (len(lecture_renew_class) != 0): #강의 동기화
         for i in range (0, len(lecture_renew_class)):
             info_split = [lecture_renew_class[i], lecture_renew_name[i], lecture_renew_time[i]]
-            time_text = (info_split[2])[-16:] #마감시간만 가져옴 (2023-06-11 23:59)
-            time_text_list = time_text.split(' ') #time_text_list[0] = "2023-06-11", time_text_list[1] = "23:59"
+            time_text = (info_split[2])[-16:]
+            time_text_list = time_text.split(' ')
             time_hour_and_min = 'T' + time_text_list[1] + ':00' 
             event['summary'] = "[" + info_split[0] + "] " + info_split[1]
             event['start'] = {'dateTime' : time_text_list[0] + time_hour_and_min, 'timeZone' : 'Asia/Seoul'}
@@ -241,8 +246,8 @@ def klas_renew(myID, myPW):
     if (len(homework_renew_class) != 0): #과제 동기화
         for i in range (0, len(homework_renew_class)):
             info_split = [homework_renew_class[i], homework_renew_name[i], homework_renew_time[i]]
-            time_text = (info_split[2])[-19:] #마감시간만 가져옴 (2023-06-11 23:59:59)
-            time_text_list = time_text.split(' ') #time_text_list[0] = "2023-06-11", time_text_list[1] = "23:59:59"
+            time_text = (info_split[2])[-19:]
+            time_text_list = time_text.split(' ')
             time_hour_and_min = 'T' + time_text_list[1]
             event['summary'] = "[" + info_split[0] + "] " + info_split[1]
             event['start'] = {'dateTime' : time_text_list[0] + time_hour_and_min, 'timeZone' : 'Asia/Seoul'}
@@ -253,8 +258,8 @@ def klas_renew(myID, myPW):
     if (len(quiz_renew_class) != 0): #퀴즈 동기화
         for i in range (0, len(quiz_renew_class)):
             info_split = [quiz_renew_class[i], quiz_renew_name[i], quiz_renew_time[i]]
-            time_text = (info_split[2])[-16:] #마감시간만 가져옴 (2023-06-11 23:59)
-            time_text_list = time_text.split(' ') #time_text_list[0] = "2023-06-11", time_text_list[1] = "23:59"
+            time_text = (info_split[2])[-16:]
+            time_text_list = time_text.split(' ')
             time_hour_and_min = 'T' + time_text_list[1] + ':00'
             event['summary'] = "[" + info_split[0] + "] " + info_split[1]
             event['start'] = {'dateTime' : time_text_list[0] + time_hour_and_min, 'timeZone' : 'Asia/Seoul'}
