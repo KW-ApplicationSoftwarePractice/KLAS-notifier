@@ -48,11 +48,11 @@ def klas_dl(myID, myPW):
     driver.get(url)
     time.sleep(2)
 
-    # 학기 선택
-    semester_dropdown = driver.find_element(By.NAME, "selectYearhakgi")
-    select_semester = Select(semester_dropdown)
-    select_semester.select_by_index(1)
-    time.sleep(2)
+#     # 학기 선택
+#     semester_dropdown = driver.find_element(By.NAME, "selectYearhakgi")
+#     select_semester = Select(semester_dropdown)
+#     select_semester.select_by_index(1)
+#     time.sleep(2)
 
     # 강의 선택
     subj_dropdown = driver.find_element(By.NAME, "selectSubj")
