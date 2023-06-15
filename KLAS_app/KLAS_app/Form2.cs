@@ -56,6 +56,7 @@ namespace Win_KLAS
 
             string output = process.StandardOutput.ReadToEnd();
             
+            /*
             Process apro = new Process();
 
             apro.StartInfo.UseShellExecute = false;
@@ -71,7 +72,7 @@ namespace Win_KLAS
 
             string alert = apro.StandardOutput.ReadToEnd();
 
-            if (alert == "0\r\n")
+            if (alert == "1\r\n")
             {
                 new ToastContentBuilder()
                  .AddArgument("action", "viewConversation")
@@ -80,6 +81,7 @@ namespace Win_KLAS
                  .AddText("새로운 게시글이 올라왔습니다!")
                  .Show();
             }
+            */
 
             string[] slash = new string[] { "####" };
             string[] sep = output.Split(slash, StringSplitOptions.None);
